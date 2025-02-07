@@ -6,7 +6,7 @@
 /*   By: nogura <nogura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 21:22:43 by nogura            #+#    #+#             */
-/*   Updated: 2025/01/31 22:52:52 by nogura           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:11:07 by nogura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,10 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*src = (const unsigned char *)s;
-	unsigned char		uc;
 
-	uc = (unsigned char)c;
-	while (n >= sizeof(size_t))
-	{
-		if (*(const size_t *)src & uc)
-			break ;
-		src += sizeof(size_t);
-		n -= sizeof(size_t);
-	}
 	while (n--)
 	{
-		if (*src == uc)
+		if (*src == (unsigned char)c)
 			return ((void *)src);
 		src++;
 	}
@@ -36,22 +27,13 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t				*i_dest;
-	const size_t		*i_src;
-	unsigned char		*c_dest;
-	const unsigned char	*c_src;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	i_dest = (size_t *)dest;
-	i_src = (const size_t *)src;
-	while (n >= sizeof(size_t))
-	{
-		*i_dest++ = *i_src++;
-		n -= sizeof(size_t);
-	}
-	c_dest = (unsigned char *)i_dest;
-	c_src = (const unsigned char *)i_src;
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
 	while (n--)
-		*c_dest++ = *c_src++;
+		*d++ = *s++;
 	return (dest);
 }
 
